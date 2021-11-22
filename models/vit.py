@@ -4,6 +4,7 @@ import torch
 import torch.nn.functional as F
 from einops import rearrange
 from torch import nn
+from torchsummary import summary
 
 MIN_NUM_PATCHES = 16
 
@@ -126,3 +127,15 @@ class ViT(nn.Module):
 
         x = self.to_cls_token(x[:, 0])
         return self.mlp_head(x)
+
+# print(summary(ViT(
+#     image_size = 32,
+#     patch_size = 4,
+#     num_classes = 10,
+#     dim = 192,
+#     depth = 4,
+#     heads = 8,
+#     mlp_dim = 128,
+#     dropout = 0.1,
+#     emb_dropout = 0.1
+# ), (3, 32, 32)))
